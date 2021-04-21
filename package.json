@@ -25,6 +25,6 @@
     "cypress:ci": "bin/rake db:seed:reset && LETTER_OPENER=true bin/rails server > /dev/null & wait-on http://localhost:3000 && cypress run"
   },
   "engines": {
-    "node": "> 12.0"
+    "node": "14.16"
   }
 }
