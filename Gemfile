@@ -11,7 +11,7 @@ gem "coffee-rails", "~> 4.2"
 gem "components", git: "https://github.com/jensljungblad/components.git",
                   ref: "ac97cd60b1567eb997aaebaf021dd289c8dc56dd"
 gem "jbuilder", "~> 2.5"
-gem "puma", "~> 3.11"
+gem "puma", "~> 4.3"
 gem "pundit", "~> 1.1.0"
 gem "rails", "~> 5.2.4", ">= 5.2.4.4"
 gem "rolify", "~> 5.2.0"
