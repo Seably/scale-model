@@ -48,19 +48,17 @@ module Manage
       @employment = scope.build
       @employment.build_user
       authorize([:manage, @employment])
-
-      @subscription = @organization.subscriptions.active.first
     end
 
     def create
       @employment = scope.build(employment_params)
       authorize([:manage, @employment])
+      @employment.user.password = Clearance::Token.new
 
-      if EmployeeInviteService.new(@employment, current_user).call
+      if @employment.save
         flash[:success] = "Employee added!"
         redirect_to manage_organization_employees_path
       else
-        @subscription = @organization.subscriptions.active.first
         render :new
       end
     end
