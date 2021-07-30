@@ -14,27 +14,8 @@
                         label_options: { optional: true },
                         placeholder: "Write a welcome message",
                         rows: 4 %>
-        <% if @subscription.present? && @employment.organization.licenses_left.zero? %>
-          <p class="u-text-muted" data-cy="license-pricing">
-          You have allocated all of your <%= @organization.licenses %> licenses. Inviting more employees will automatically increase your total number of licenses.
-          You'll be charged <span data-cy="next-charge"><%= humanized_money_with_symbol(expected_change_on_next_charge(@subscription, 1)) %></span> for adding 1 license, prorated for the current billing period.</p>
-        <% else %>
-          <p class="u-text-muted">
-            <%= @organization.employees.count %> of your <%= pluralize(@organization.licenses, "license") %> used. Inviting new employees will allocate additional licenses.
-          </p>
-        <% end %>
       </div>
       <div class="modal__footer">
-        <%= button_tag "Bulk import",
-                       type: :button,
-                       class: "btn--link u-p-0 u-text-blue u-text-bold",
-                       data: {
-                         controller: "intercom",
-                         action: "intercom#newMessage",
-                         intercom_message: "Hi! I want to do a bulk import of employees, could you help me out?"
-                       } %>
-        <span class="u-flex-1"></span>
-        <%= f.hidden_field :increase_licenses_if_full, value: true %>
         <%= button_tag "Cancel",
                        type: :button,
                        class: "btn--link u-mr u-text-muted",
