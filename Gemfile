@@ -7,7 +7,6 @@ ruby "2.6.6"
 
 gem "bootsnap", ">= 1.1.0", require: false
 gem "clearance", "~> 2.5"
-gem "coffee-rails", "~> 4.2"
 gem "components", git: "https://github.com/jensljungblad/components.git",
                   ref: "ac97cd60b1567eb997aaebaf021dd289c8dc56dd"
 gem "jbuilder", "~> 2.5"
