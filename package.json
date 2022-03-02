@@ -2,7 +2,7 @@
   "name": "vessels",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "5.2.1",
+    "@rails/webpacker": "5.4.3",
     "@stimulus/polyfills": "^1.1.0",
     "babel-eslint": "^8.2.3",
     "core-js": "^3.6.5",
