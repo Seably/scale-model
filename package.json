@@ -17,8 +17,7 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
     "prettier": "^1.13.4",
-    "wait-on": "^2.1.0",
-    "webpack-dev-server": "^3.11.2"
+    "wait-on": "^2.1.0"
   },
   "scripts": {
     "cypress": "bin/rake db:seed:reset && cypress open",
