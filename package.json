@@ -11,7 +11,7 @@
     "stimulus": "^1.1.0"
   },
   "devDependencies": {
-    "cypress": "3.8.3",
+    "cypress": "9.5.1",
     "cypress-circleci-reporter": "^0.1.2",
     "eslint": "^4.18.1",
     "eslint-config-prettier": "^2.9.0",
