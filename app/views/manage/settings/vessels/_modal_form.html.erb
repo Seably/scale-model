@@ -8,20 +8,40 @@
                   builder: WrappedFormBuilder,
                   remote: true do |f| %>
       <div class="modal__body">
-        <%= f.text_field :name, placeholder: "Name", "data-cy": "name" %>
+        <% if action_name == "remove" %>
+          Do you wish to move the connected users to another existing vessel
+          <br><br>
+          <%= label_tag :move_users_to_vessel %>
+          <%= select_tag :move_users_to_vessel,
+                         options_from_collection_for_select(@vessels, "id", "name"),
+                         prompt: "Do not move user", data: { cy: "select-vessel" } %>
+        <% else %>
+          <%= f.text_field :name, placeholder: "Name", "data-cy": "name" %>
+        <% end %>
       </div>
       <div class="modal__footer">
         <%= button_tag "Cancel",
                        type: :button,
                        class: "btn--link u-mr u-text-muted",
                        data: { target: "form-activation.action", action: "modal#hide" } %>
-        <%= f.submit "Save",
-          class: "btn btn--primary",
-          data: {
-            cy: "vessel-submit",
-            disable_with: "Saving"
-          }
-        %>
+        <% if action_name == "remove" %>
+          <%= f.button "Remove",
+                       formmethod: :delete,
+                       class: "btn btn--primary",
+                       data: {
+                         cy: "vessel-remove-submit",
+                         disable_with: "Removing"
+                       }
+          %>
+        <% else %>
+          <%= f.submit "Save",
+                       class: "btn btn--primary",
+                       data: {
+                         cy: "vessel-submit",
+                         disable_with: "Saving"
+                       }
+          %>
+        <% end %>
       </div>
     <% end %>
   <% end %>

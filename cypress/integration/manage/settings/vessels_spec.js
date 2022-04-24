@@ -25,19 +25,24 @@ describe("Manage > Settings > Vessels", () => {
     cy.get("[data-cy=vessel-1]").contains("An updated vessel");
   });
 
-  it("remove an existing vessel", () => {
-    cy.on("window:confirm", () => {
-      return true;
-    });
+  it("remove an existing vessel and do not move users other to vessel", () => {
+    cy.get("[data-cy=vessel-1] .u-text-blue").contains("View (1)");
     cy.get("[data-cy=vessel-1-remove]").click();
+    cy.get(".modal").should("be.visible", { log: false });
+    cy.get("[data-cy=vessel-remove-submit]").click();
+    cy.get(".modal").should("not.be.visible", { log: false });
     cy.get("[data-cy=vessel-1]").should("not.exist");
   });
 
-  it("skip removing existing vessel with confirmation modal", () => {
-    cy.on("window:confirm", () => {
-      return false;
-    });
+  it("remove an existing vessel and move users other to vessel", () => {
+    cy.get("[data-cy=vessel-1] .u-text-blue").contains("View (1)");
+    cy.get("[data-cy=vessel-2] .u-text-blue").contains("View (0)");
     cy.get("[data-cy=vessel-1-remove]").click();
-    cy.get("[data-cy=vessel-1]");
+    cy.get(".modal").should("be.visible", { log: false });
+    cy.get("[data-cy=select-vessel]").select("M/S Remmer Line");
+    cy.get("[data-cy=vessel-remove-submit]").click();
+    cy.get(".modal").should("not.be.visible", { log: false });
+    cy.get("[data-cy=vessel-1]").should("not.exist");
+    cy.get("[data-cy=vessel-2] .u-text-blue").contains("View (1)");
   });
 });

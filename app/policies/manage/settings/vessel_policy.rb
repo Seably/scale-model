@@ -19,6 +19,10 @@ module Manage
         true
       end
 
+      def remove?
+        true
+      end
+
       def destroy?
         true
       end

@@ -37,14 +37,25 @@ module Manage
         end
       end
 
+      def remove
+        @vessel = scope.find(params[:id])
+        @vessels = policy_scope([:manage, :settings, Vessel]).by_name.where.not(id: @vessel.id)
+        authorize([:manage, :settings, @vessel])
+      end
+
       def destroy
         @vessel = scope.find(params[:id])
         authorize([:manage, :settings, @vessel])
-        if @vessel.destroy
-          redirect_back fallback_location: edit_manage_organization_settings_meta_data_path,
-                        flash: { success: "Vessel removed!" }
-        else
-          render "edit", flash: { danger: "There were issues removing the vessel" }
+
+        ActiveRecord::Base.transaction do
+          @vessel.move_users_to_other_vessel(params[:move_users_to_vessel])
+
+          if @vessel.destroy
+            redirect_back fallback_location: edit_manage_organization_settings_meta_data_path,
+                          flash: { success: "Vessel removed!" }
+          else
+            render "edit", flash: { danger: "There were issues removing the vessel" }
+          end
         end
       end
 

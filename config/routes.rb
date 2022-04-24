@@ -18,7 +18,11 @@ Rails.application.routes.draw do
       namespace :settings do
         resource :organization, only: %i[edit update]
         resource :meta_data, only: %i[edit]
-        resources :vessels, except: %i[index]
+        resources :vessels, except: %i[index] do
+          member do
+            get :remove
+          end
+        end
       end
     end
   end

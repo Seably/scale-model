@@ -7,4 +7,8 @@ class Vessel < ApplicationRecord
   has_many :employments
 
   validates_presence_of :name
+
+  def move_users_to_other_vessel(new_vessel_id)
+    employments.update_all(vessel_id: Vessel.find_by(id: new_vessel_id)&.id)
+  end
 end
